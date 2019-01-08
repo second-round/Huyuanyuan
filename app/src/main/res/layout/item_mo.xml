@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_312"
+    android:layout_height="@dimen/dp_118"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginLeft="@dimen/dp_20"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10"
+    android:background="@drawable/selector_backgrund_ziliao"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/dp_85"
+        android:layout_height="@dimen/dp_98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="@dimen/dp_10"
+        app:srcCompat="@mipmap/bitmap" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:ellipsize="end"
+        android:layout_marginTop="20dp"
+        android:text="啦啦啦"
+        android:textColor="#666"
+        android:textSize="@dimen/sp_12"
+        android:maxLines="1"
+        android:maxEms="12"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_14"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
+        android:text="￥10999.00"
+        android:textColor="#f00"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#fff</color>
+    <color name="mian_textview_shape">#ededed</color>
+    <color name="text_color_six">#666666</color>
+    <color name="software_textColor_selected">#FF1C94EA</color>
+    <color name="software_textColor_unselected">#FFDCE0DF</color>
+    <drawable name="compare_data_text1">#FFFFFF</drawable>
+    <drawable name="compare_data_text2">#FF4B4A</drawable>
+</resources>
