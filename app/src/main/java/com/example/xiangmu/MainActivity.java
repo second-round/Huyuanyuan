@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements IView {
             LoginBean loginBean= (LoginBean) data;
             if (loginBean.getStatus().equals("0000")){
                 Toast.makeText(MainActivity.this,loginBean.getMessage(),Toast.LENGTH_SHORT).show();
+
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 finish();
             }

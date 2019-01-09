@@ -1,1 +1,1 @@
-include ':app', ':moni2', ':kaoone', ':day7', ':day8'
+include ':app'
