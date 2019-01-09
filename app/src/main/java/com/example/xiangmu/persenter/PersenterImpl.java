@@ -35,4 +35,14 @@ public class PersenterImpl implements Persenter{
             }
         });
     }
+
+    @Override
+    public void onPutStartRequest(String tobushop, Map<String, String> map, Class clazz) {
+        model.requestPut(tobushop,map,clazz, new MyCallBack() {
+            @Override
+            public void CallBack(Object data) {
+                iViewl.requesta(data);
+            }
+        });
+    }
 }

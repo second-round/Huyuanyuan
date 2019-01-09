@@ -1,5 +1,10 @@
 package com.example.xiangmu.netWork;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+
+import com.example.xiangmu.app.App;
 import com.example.xiangmu.callback.MyCallBack;
 import com.example.xiangmu.util.Constant;
 
@@ -8,9 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -39,7 +47,26 @@ public class RetrofitManager<T> {
     public RetrofitManager(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient builder = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request();
+                        SharedPreferences preferences = App.getApplication().getSharedPreferences("User", Context.MODE_PRIVATE);
+                        String userId = preferences.getString("userId", "");
+                        String sessionId = preferences.getString("sessionId", "");
+                        Request.Builder builder1 = request.newBuilder();
+                        builder1.method(request.method(),request.body());
+
+                        if(!TextUtils.isEmpty(userId)&&!TextUtils.isEmpty(sessionId)){
+                            builder1.addHeader("userId",userId);
+                            builder1.addHeader("sessionId",sessionId);
+                        }
+
+                        Request build = builder1.build();
+
+                        return chain.proceed(build);
+                    }
+                })
                 .readTimeout(10,TimeUnit.SECONDS)
                 .writeTimeout(10,TimeUnit.SECONDS)
                 .connectTimeout(10,TimeUnit.SECONDS)

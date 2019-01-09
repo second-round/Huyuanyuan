@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements IView {
     PersenterImpl persenter;
     @BindView(R.id.eyes)
     ImageView eyes;
+    SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
+    private SharedPreferences.Editor edit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements IView {
     }
 
     private void initView() {
+        edit = sharedPreferences.edit();
         persenter=new PersenterImpl(this);
         phone.setText(SharedPreferencesUtil.getString("phoneNum",null));
         if (SharedPreferencesUtil.getBoolean("loginCheck",false)){

@@ -39,4 +39,19 @@ public class ModelImpl implements Model{
         });
     }
 
+    @Override
+    public void requestPut(String tobushop, Map<String, String> map, final Class clazz, final MyCallBack myCallBack) {
+        RetrofitManager.getInstance().put(tobushop,map).result(new RetrofitManager.HttpListener() {
+            @Override
+            public void onSuccess(String data) {
+                Object o = new Gson().fromJson(data, clazz);
+                myCallBack.CallBack(o);
+            }
+
+            @Override
+            public void onFail(String error) {
+            }
+        });
+    }
+
 }
