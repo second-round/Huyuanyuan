@@ -180,7 +180,7 @@
             android:layout_marginRight="@dimen/dp_24"
             />
     </LinearLayout>
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/mine_icon"
         android:layout_width="@dimen/dp_80"
         android:layout_height="@dimen/dp_80"
@@ -188,6 +188,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_106"
         android:background="@mipmap/bbb"
+        app:roundAsCircle="true"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

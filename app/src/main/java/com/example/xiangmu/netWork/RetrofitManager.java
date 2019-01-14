@@ -29,11 +29,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class RetrofitManager<T> {
-
-
     public static RetrofitManager retrofitManager;
-
-
 
     public static synchronized RetrofitManager getInstance(){
         if(retrofitManager==null){
@@ -45,7 +41,6 @@ public class RetrofitManager<T> {
     private BaseApis mBaseApis;
 
     public RetrofitManager(){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient builder = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
@@ -56,14 +51,11 @@ public class RetrofitManager<T> {
                         String sessionId = preferences.getString("sessionId", "");
                         Request.Builder builder1 = request.newBuilder();
                         builder1.method(request.method(),request.body());
-
                         if(!TextUtils.isEmpty(userId)&&!TextUtils.isEmpty(sessionId)){
                             builder1.addHeader("userId",userId);
                             builder1.addHeader("sessionId",sessionId);
                         }
-
                         Request build = builder1.build();
-
                         return chain.proceed(build);
                     }
                 })
@@ -93,83 +85,91 @@ public class RetrofitManager<T> {
         return requestBodyHashMap;
     }
 
-    public RetrofitManager get(String url){
+    public RetrofitManager get(String url,HttpListener listener){
         mBaseApis.get(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+                .subscribe(getObserver(listener));
         return retrofitManager;
     }
 
-    public RetrofitManager post(String dataUrl,Map<String,String> map){
+    public RetrofitManager post(String dataUrl,Map<String,String> map,HttpListener listener){
         if(map==null){
             map=new HashMap<>();
         }
         mBaseApis.post(dataUrl,map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+                .subscribe(getObserver(listener));
         return retrofitManager;
     }
 
-    public RetrofitManager put(String dataUrl,Map<String,String> map){
+    public RetrofitManager put(String dataUrl,Map<String,String> map,HttpListener listener){
         if(map==null){
             map=new HashMap<>();
         }
         mBaseApis.put(dataUrl,map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+                .subscribe(getObserver(listener));
         return retrofitManager;
     }
 
-    public RetrofitManager postFormBoby(String dataUrl,Map<String,RequestBody> map){
+
+
+    public void delete(String quxiao, Map<String, String> map, HttpListener listener) {
+        if(map==null){
+            map=new HashMap<>();
+        }
+        mBaseApis.delete(quxiao,map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(listener));
+    }
+
+
+    public RetrofitManager postFormBoby(String dataUrl,Map<String,RequestBody> map,HttpListener listener){
         if(map==null){
             map=new HashMap<>();
         }
         mBaseApis.postFormBody(dataUrl,map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+                .subscribe(getObserver(listener));
         return retrofitManager;
     }
 
+    private Observer getObserver(final HttpListener listener) {
+        Observer observer = new Observer<ResponseBody>() {
 
-    private Observer observer=new Observer<ResponseBody>(){
+            //观察者
+            @Override
+            public void onCompleted() {
 
-        //观察者
-        @Override
-        public void onCompleted() {
+            }
 
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onNext(ResponseBody responseBody) {
-            try {
-                String data = responseBody.string();
-                if(listener!=null){
-                    listener.onSuccess(data);
-                }
-            } catch (IOException e) {
+            @Override
+            public void onError(Throwable e) {
                 e.printStackTrace();
-                if(listener!=null){
-                    listener.onFail(e.getMessage());
+            }
+
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                try {
+                    String data = responseBody.string();
+                    if (listener != null) {
+                        listener.onSuccess(data);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    if (listener != null) {
+                        listener.onFail(e.getMessage());
+                    }
                 }
             }
-        }
-    };
-
-    private HttpListener listener;
-
-    public void result(HttpListener listener){
-        this.listener=listener;
+        };
+        return observer;
     }
-
     public interface HttpListener {
         void onSuccess(String data);
         void onFail(String error);

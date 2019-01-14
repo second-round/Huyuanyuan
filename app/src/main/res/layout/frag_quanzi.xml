@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="151dp"
-        android:text="quanzi" />
+    android:layout_height="wrap_content">
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/dp_20"
+        >
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
 </RelativeLayout>

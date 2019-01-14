@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:layout_gravity="center_vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_97">
+                <ImageView
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    android:background="@mipmap/touxiang_cf"
+                    android:id="@+id/recycle_icon"
+                    android:layout_marginRight="@dimen/dp_10"
+                    />
+                <TextView
+                    android:id="@+id/recycle_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/recycle_icon"
+
+                    />
+                <TextView
+                    android:id="@+id/recycle_price"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_20"
+                    android:textColor="#ff0606"
+                    android:layout_alignParentBottom="true"
+                    android:text="668"
+                    android:gravity="center"
+                    android:layout_toRightOf="@id/recycle_icon"
+                    />
+                <com.example.xiangmu.view.MyCustomView
+                    android:id="@+id/customjiajian"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/recycle_price"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/dp_120"
+                    ></com.example.xiangmu.view.MyCustomView>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

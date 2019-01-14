@@ -4,6 +4,7 @@ import java.util.Map;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -24,6 +25,9 @@ public interface BaseApis<T> {
 
     @PUT
     Observable<ResponseBody> put(@Url String url, @QueryMap Map<String, String> map);
+
+    @DELETE
+    Observable<ResponseBody> delete(@Url String url, @QueryMap Map<String, String> map);
 
     @Multipart
     @POST

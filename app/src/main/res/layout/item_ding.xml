@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:frseco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_14"
+    android:paddingTop="@dimen/dp_20"
+    android:elevation="@dimen/dp_4"
+    android:layout_height="wrap_content">
+    <CheckBox
+        android:id="@+id/che_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="@dimen/dp_292"
+        android:layout_marginLeft="@dimen/dp_14"
+        android:layout_marginRight="@dimen/dp_24"
+        android:layout_toRightOf="@id/che_box"
+        android:layout_height="@dimen/dp_97">
+        <ImageView
+            android:id="@+id/sd_shop_sim"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60" />
+        <TextView
+            android:id="@+id/tv_shop_name"
+            android:textColor="#666666"
+            android:text="23"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toRightOf="@id/sd_shop_sim"
+            android:textSize="@dimen/sp_12"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#ff0606"
+            android:text="23"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_toRightOf="@id/sd_shop_sim"
+            android:textSize="@dimen/sp_14"
+            android:id="@+id/tv_shop_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/cus_view"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_toRightOf="@id/tv_shop_price"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+            <Button
+                android:background="#00000000"
+                android:textSize="@dimen/sp_14"
+                android:id="@+id/reverse"
+                android:text="一"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/text_color_six"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_18" />
+            <TextView
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_15"
+                android:layout_width="@dimen/dp_31"
+                android:layout_height="@dimen/dp_30"
+                android:text="1"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/count"
+                android:gravity="center"
+                android:background="@drawable/textview_border"
+                />
+            <Button
+                android:id="@+id/add"
+                android:textColor="@color/text_color_six"
+                android:textSize="@dimen/sp_14"
+                android:text="+"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                android:gravity="center"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_18" />
+        </LinearLayout>>
+    </RelativeLayout>
+
+</RelativeLayout>

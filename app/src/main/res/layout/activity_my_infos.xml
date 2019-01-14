@@ -27,15 +27,17 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_18"
                 android:layout_weight="1"
                 android:text="我的头像"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_height="wrap_content" />
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/myIcon"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
                 android:background="@mipmap/bbb"
+                app:roundAsCircle="true"
                 android:layout_marginRight="@dimen/dp_15"/>
         </LinearLayout>
         <TextView
@@ -54,16 +56,26 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_18"
                 android:layout_weight="1"
                 android:text="我的昵称"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_30"
+                android:textSize="@dimen/sp_16"
+                android:textColor="#999"
+                android:text="我是狂吃不胖的小姐姐"
+                android:layout_marginRight="@dimen/dp_15"/>
+            <EditText
+                android:id="@+id/changeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="#999"
+                android:visibility="gone"
                 android:text="我是狂吃不胖的小姐姐"
                 android:layout_marginRight="@dimen/dp_15"/>
         </LinearLayout>
@@ -83,16 +95,26 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_18"
                 android:layout_weight="1"
                 android:text="我的密码"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_30"
+                android:textSize="@dimen/sp_16"
+                android:textColor="#999"
+                android:text="1234567890"
+                android:layout_marginRight="@dimen/dp_15"/>
+            <EditText
+                android:id="@+id/changePhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="#999"
+                android:visibility="gone"
                 android:text="1234567890"
                 android:layout_marginRight="@dimen/dp_15"/>
         </LinearLayout>

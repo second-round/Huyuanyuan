@@ -9,4 +9,6 @@ public interface Model {
     void requestDataGet(String path, final Class clazz, final MyCallBack myCallBack);
 
     void requestPut(String tobushop, Map<String,String> map, Class clazz, MyCallBack myCallBack);
+
+    void requestDelete(String quxiao, Map<String, String> map, Class clazz, MyCallBack myCallBack);
 }

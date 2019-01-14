@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements IView {
     PersenterImpl persenter;
     @BindView(R.id.eyes)
     ImageView eyes;
-    SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
+    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor edit;
 
 
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements IView {
     }
 
     private void initView() {
+        sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
         edit = sharedPreferences.edit();
         persenter=new PersenterImpl(this);
         phone.setText(SharedPreferencesUtil.getString("phoneNum",null));
@@ -106,7 +107,10 @@ public class MainActivity extends AppCompatActivity implements IView {
             LoginBean loginBean= (LoginBean) data;
             if (loginBean.getStatus().equals("0000")){
                 Toast.makeText(MainActivity.this,loginBean.getMessage(),Toast.LENGTH_SHORT).show();
-
+                edit.putString("userId",loginBean.getResult().getUserId()+"");
+                edit.putString("sessionId",loginBean.getResult().getSessionId()+"");
+                edit.putString("password",password.getText().toString());
+                edit.commit();
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 finish();
             }

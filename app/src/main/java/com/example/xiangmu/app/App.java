@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.view.WindowManager;
 
 import com.example.xiangmu.util.Constant;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class App extends Application {
     //绘制页面时参照的设计图宽度
@@ -17,6 +18,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         resetDensity();
+        Fresco.initialize(this);
         context=getApplicationContext();
     }
     @Override

@@ -70,14 +70,14 @@ public class MyCustomView extends RelativeLayout implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.reverse:
+            case R.id.add:
                 num++;
                 editText.setText(num+"");
                 listBeans.get(position).setCount(num);
                 callbacklistener.callback(num);
                 shoppingAdapter.notifyItemChanged(position);
                 break;
-            case R.id.add:
+            case R.id.reverse:
                 if (num>1){
                     num--;
                 }else {
@@ -95,7 +95,6 @@ public class MyCustomView extends RelativeLayout implements View.OnClickListener
     private void tosat(String msg){
         Toast.makeText(context,msg,Toast.LENGTH_LONG).show();
     }
-
     public void setDAta(MyShoppingAdapter shoppingAdapter,List<ShowShoppingBean.ResuleBean> list,int i){
         listBeans=list;
         this.shoppingAdapter=shoppingAdapter;

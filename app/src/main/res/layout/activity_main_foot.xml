@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我的足迹"
+        android:gravity="center"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/text_color_six"
+        android:layout_marginTop="@dimen/dp_40"
+        />
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/dp_12"
+        android:id="@+id/xrecycle"
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
+</LinearLayout>

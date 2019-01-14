@@ -49,9 +49,16 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
     implementation 'org.greenrobot:eventbus:3.0.0'
-
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.github.bumptech.glide:glide:3.+'
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+    implementation 'liji.library.dev:citypickerview:1.1.0'
+    implementation 'com.facebook.fresco:fresco:1.9.0'
+    implementation 'com.facebook.fresco:animated-gif:1.9.0'
+    //gif
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    //okhttp网络层依赖
+    implementation "com.facebook.fresco:imagepipeline-okhttp3:0.14.0+"
+
 
 }

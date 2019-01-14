@@ -44,7 +44,6 @@ public class MyShoppingAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewH
         View view=LayoutInflater.from(context).inflate(R.layout.item_shop,viewGroup,false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull final XRecyclerView.ViewHolder viewHolder, final int i) {
         final ViewHolder holder= (ViewHolder) viewHolder;
@@ -53,6 +52,7 @@ public class MyShoppingAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewH
         Uri parse = Uri.parse(mlist.get(i).getPic());
         Glide.with(context).load(mlist.get(i).getPic()).into(holder.sd_shop_sim);
         holder.che_box.setChecked(mlist.get(i).isItem_check());
+
         holder.che_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

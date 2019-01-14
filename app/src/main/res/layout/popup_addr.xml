@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#757575"
+    android:layout_marginLeft="@dimen/dp_15"
+    android:layout_marginRight="@dimen/dp_15"
+    android:layout_height="@dimen/dp_250">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_weight="1"
+            >
+        </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/addAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击添加新的收获地址"
+            android:gravity="center"
+            android:textColor="#f00"
+            android:textSize="@dimen/sp_16"
+            />
+    </LinearLayout>
+</ScrollView>

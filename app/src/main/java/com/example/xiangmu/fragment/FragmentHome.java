@@ -213,6 +213,9 @@ public class FragmentHome extends Fragment implements IView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.choose:
+                pins.setVisibility(View.GONE);
+                res.setVisibility(View.GONE);
+                mos.setVisibility(View.GONE);
                 initDatas();
                 break;
             case R.id.huans:

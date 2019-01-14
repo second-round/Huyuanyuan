@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import com.example.xiangmu.view.CustomJiaJian;
 import com.example.xiangmu.view.IView;
 import com.example.xiangmu.view.MyCustomView;
 import com.example.xiangmu.view.MyAlert;
+import com.google.gson.Gson;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -93,7 +95,6 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
             commodityId = goodsBean.getResult().getCommodityId();
             load();
         }
-
     }
 
     @SuppressLint("JavascriptInterface")
@@ -102,13 +103,25 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
         String picture = goodsBean.getResult().getPicture();
         String[] split = picture.split(",");
         List<String> list = Arrays.asList(split);
-        webview.loadDataWithBaseURL(null, details, "text/html", "utf-8", null);
+        WebSettings settings = webview.getSettings();
+        settings.setJavaScriptEnabled(true);//支持JS
+        String js = "<script type=\"text/javascript\">"+
+                "var imgs = document.getElementsByTagName('img');" + // 找到img标签
+                "for(var i = 0; i<imgs.length; i++){" +  // 逐个改变
+                "imgs[i].style.width = '100%';" +  // 宽度改为100%
+                "imgs[i].style.height = 'auto';" +
+                "}" +
+                "</script>";
+        webview.loadDataWithBaseURL(null, details+js, "text/html", "utf-8", null);
         banner.setImageLoader(new GlideImageLoader());
         banner.setImages(list);
         banner.start();
         price.setText("￥" + goodsBean.getResult().getPrice() + "");
         commodityName.setText(goodsBean.getResult().getCommodityName());
         weight.setText(goodsBean.getResult().getWeight() + "kg");
+//        detalis_web.loadDataWithBaseURL(null, detailsHotBean.getResult().getDetails()+js, "textml", "utf-8", null);
+
+
     }
 
     @Override
@@ -121,7 +134,6 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.shopAdd:
-                //goodsBean.getResult().getCategoryId();
                 View v=getLayoutInflater().inflate(R.layout.alert_goods,null);
 
                 myDialog = new MyAlert(MyInfoActivity.this,0,0,v,R.style.DialogTheme);
@@ -141,6 +153,7 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
                         String string = count.getText().toString();
                         int i = Integer.parseInt(string);
                         selShopCar();
+                        myDialog.dismiss();
                     }
                 });
                 cancel.setOnClickListener(new View.OnClickListener() {
@@ -189,7 +202,6 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
 
     //添加购物车
     private void addShopCar(List<ShopResultBean> list){
-        String string="[";
         for (int i=0;i<list.size();i++){
             if(Integer.valueOf(commodityId)==list.get(i).getCommodityId()){
                 int count = list.get(i).getCount();
@@ -201,14 +213,10 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
                 break;
             }
         }
-        for (ShopResultBean resultBean:list){
-            string+="{\"commodityId\":"+resultBean.getCommodityId()+",\"count\":"+resultBean.getCount()+"},";
-        }
-        String substring = string.substring(0, string.length() - 1);
-        substring+="]";
-        Log.i("TAG",substring);
+        String s = new Gson().toJson(list);
+
         Map<String,String> map=new HashMap<>();
-        map.put("data",substring);
+        map.put("data",s);
         persenter.onPutStartRequest(Constant.TOBUSHOP,map,ShopCarAddBean.class);
     }
 

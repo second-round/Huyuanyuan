@@ -45,4 +45,14 @@ public class PersenterImpl implements Persenter{
             }
         });
     }
+
+    @Override
+    public void sendMessageDelete(String quxiao, Map<String, String> map, Class clazz) {
+        model.requestDelete(quxiao,map,clazz, new MyCallBack() {
+            @Override
+            public void CallBack(Object data) {
+                iViewl.requesta(data);
+            }
+        });
+    }
 }

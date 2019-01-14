@@ -1,11 +1,12 @@
 package com.example.xiangmu.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowShoppingBean {
     private String status;
     private String message;
-    private List<ResuleBean> result;
+    private List<ResuleBean> result=new ArrayList<>();
     private final String SUCCESS_CODE="0000";
     public boolean isSuceess(){
         return status.equals(SUCCESS_CODE);
@@ -33,6 +34,9 @@ public class ShowShoppingBean {
 
     public void setResult(List<ResuleBean> result) {
         this.result = result;
+    }
+    public void addResult(ResuleBean result) {
+        this.result.add(result);
     }
 
     public static class ResuleBean{

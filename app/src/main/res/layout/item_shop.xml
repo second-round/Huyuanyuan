@@ -43,13 +43,13 @@
             android:id="@+id/tv_shop_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <com.example.dell.myprojects.shoppingactivity.MyCustomView
+        <com.example.xiangmu.view.MyCustomView
             android:id="@+id/cus_view"
             android:layout_marginTop="@dimen/dp_70"
             android:layout_toRightOf="@id/tv_shop_price"
             android:layout_marginLeft="@dimen/dp_70"
             android:layout_width="match_parent"
-            android:layout_height="50dp"></com.example.dell.myprojects.shoppingactivity.MyCustomView>
+            android:layout_height="50dp"></com.example.xiangmu.view.MyCustomView>>
     </RelativeLayout>
 
 </RelativeLayout>

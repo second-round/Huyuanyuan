@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/radio"
-        android:layout_marginBottom="-25dp"
+        android:layout_marginBottom="-8dp"
         >
     </android.support.v4.view.ViewPager>
 </FrameLayout>
@@ -33,7 +33,7 @@
         android:background="@mipmap/bg_homepage_bottom"
         android:id="@+id/radio"
         android:orientation="horizontal"
-        android:layout_marginBottom="-30dp"
+        android:layout_marginBottom="-40dp"
         android:layout_alignParentBottom="true"
         >
         <RadioButton

@@ -3,7 +3,7 @@ package com.example.xiangmu.util;
 public interface Constant {
 
     //登录
-    String PATH = "http://172.17.8.100/";
+    String PATH = "http://mobile.bwstudent.com/";
     String LOGIN_PATH = "small/user/v1/login";
     //注册
     String REG_PATH = "small/user/v1/register";
@@ -11,7 +11,7 @@ public interface Constant {
     String ZHU_BANNER = "small/commodity/v1/bannerShow";
     //首页列表
     String ZHU_SHOPHTTP = "small/commodity/v1/commodityList";
-
+    String GETUSERBYID="small/user/verify/v1/getUserById";
     //圈子列表
     String CIRCLEPATH = "small/circle/v1/findCircleList";
     //首页三个点跳转
@@ -19,7 +19,7 @@ public interface Constant {
     //商品详情页
     String ZHU_SHOPXIANG = "small/commodity/v1/findCommodityListByLabel";
     //我的足迹
-    String ZHUJI = "small/commodity/verify/v1/browseList?page=1&count=5";
+    String ZHUJI = "small/commodity/verify/v1/browseList";
     String QUERY_NAME = "small/commodity/v1/findCommodityByKeyword";
     //我的圈子
     String MYCIRCLE = "small/circle/verify/v1/findMyCircleById";
@@ -44,7 +44,7 @@ public interface Constant {
     //查询购物车
     String QUERYSHOP = "small/order/verify/v1/findShoppingCart";
     //设置默认地址
-    String MORENDIZHI = "http://172.17.8.100/small/user/verify/v1/setDefaultReceiveAddress";
+    String MORENDIZHI = "small/user/verify/v1/setDefaultReceiveAddress";
     //查询一级类目
     String YIJI = "small/commodity/v1/findFirstCategory";
     //查询二级类目
