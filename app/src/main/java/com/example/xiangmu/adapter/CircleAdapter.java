@@ -34,6 +34,11 @@ public class CircleAdapter extends RecyclerView.Adapter<CircleAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    public void addList(List<CircleBean.ResultBean> list) {
+        this.list .addAll(list);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

@@ -16,10 +16,17 @@ import android.widget.Toast;
 
 import com.example.xiangmu.R;
 import com.example.xiangmu.adapter.AlldorInfoByStatusAdapter;
+import com.example.xiangmu.adapter.StringAdapter;
+import com.example.xiangmu.bean.AlldorInfoByStatusBean;
+import com.example.xiangmu.bean.OrderBean;
+import com.example.xiangmu.bean.RegBean;
 import com.example.xiangmu.persenter.PersenterImpl;
+import com.example.xiangmu.util.Constant;
 import com.example.xiangmu.view.IView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,28 +34,11 @@ import butterknife.Unbinder;
 
 public class AllordersPage extends Fragment implements IView {
 
-    @BindView(R.id.dingdan)
-    TextView dingdan;
-    @BindView(R.id.dingdanhao)
-    TextView dingdanhao;
-    @BindView(R.id.allordersDate)
-    TextView allordersDate;
     @BindView(R.id.allordersRecycle)
     RecyclerView allordersRecycle;
-    @BindView(R.id.relativeTv4)
-    TextView relativeTv4;
-    @BindView(R.id.allordersCount)
-    TextView allordersCount;
-    @BindView(R.id.relativeTv5)
-    TextView relativeTv5;
-    @BindView(R.id.allordersPrice)
-    TextView allordersPrice;
-    @BindView(R.id.yuan)
-    TextView yuan;
     Unbinder unbinder;
-    private PersenterImpl iPresenter;
-    private AlldorInfoByStatusAdapter adapter;
-    private SharedPreferences sharedPreferences;
+    private PersenterImpl persenter;
+    private StringAdapter adapter;
 
     @Nullable
     @Override
@@ -68,39 +58,50 @@ public class AllordersPage extends Fragment implements IView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        iPresenter=new PersenterImpl(this);
+        persenter=new PersenterImpl(this);
         allordersRecycle.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL,false));
-//        adapter=new AlldorInfoByStatusAdapter(getActivity());
-//        allordersRecycle.setAdapter(adapter);
+        adapter=new StringAdapter(getActivity(),0);
+        allordersRecycle.setAdapter(adapter);
+        adapter.setShopCarListener(new StringAdapter.ShopCarListener() {
+            @Override
+            public void callBack(OrderBean.OrderListBean list) {
+                Map<String,String> map=new HashMap<>();
+                map.put("orderId",list.getOrderId());
+                map.put("payType",1+"");
+                persenter.sendMessage(Constant.ZHIFU,map,RegBean.class);
+            }
+        });
+    }
+
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
         loadData();
     }
 
     private void loadData() {
-//        iPresenter.startRequestGet(Apis.URL_FIND_ORDER_LIST_BYSTATUS_GET
-//                +"?status="+"0"+"&page="+"1"+"&count=5",null,AlldorInfoByStatusBean.class);
+        persenter.sendGet(Constant.QUANBU+"?status=0&page=1&count=5",OrderBean.class);
     }
 
     @Override
     public void requesta(Object data) {
-
+        if (data instanceof OrderBean){
+            OrderBean bean= (OrderBean) data;
+            if (bean==null){
+                Toast.makeText(getActivity(),bean.getMessage(),Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getActivity(),bean.getMessage(),Toast.LENGTH_SHORT).show();
+                adapter.setData(bean.getOrderList());
+            }
+        }
+        if (data instanceof RegBean){
+            RegBean regBean= (RegBean) data;
+            Toast.makeText(getActivity(),regBean.getMessage(),Toast.LENGTH_SHORT).show();
+            loadData();
+        }
     }
-//
-//    @Override
-//    public void getDataSuccess(Object data) {
-//        if (data instanceof AlldorInfoByStatusBean){
-//            AlldorInfoByStatusBean bean= (AlldorInfoByStatusBean) data;
-//
-//            if (bean==null){
-//                Toast.makeText(getActivity(),bean.getMessage(),Toast.LENGTH_LONG).show();
-//            }else {
-//                adapter.setmList(bean.getResult().getDetailList());
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void getDataFail(String error) {
-//        Toast.makeText(getActivity(),error,Toast.LENGTH_LONG).show();
-//    }
 }

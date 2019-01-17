@@ -50,11 +50,17 @@
                 />
         </LinearLayout>
         <TextView
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            />
+        <TextView
             android:id="@+id/choose"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="#f00"
             android:text="选择"
+            android:layout_marginLeft="@dimen/dp_5"
             android:textSize="@dimen/sp_12"
             android:gravity="center"
             />

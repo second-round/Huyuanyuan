@@ -213,9 +213,6 @@ public class FragmentHome extends Fragment implements IView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.choose:
-                pins.setVisibility(View.GONE);
-                res.setVisibility(View.GONE);
-                mos.setVisibility(View.GONE);
                 initDatas();
                 break;
             case R.id.huans:
@@ -283,6 +280,9 @@ public class FragmentHome extends Fragment implements IView {
                 adapters.result(new ErJiAdapter.Cicklistener() {
                     @Override
                     public void setonclicklisener(int index) {
+                        pins.setVisibility(View.GONE);
+                        res.setVisibility(View.GONE);
+                        mos.setVisibility(View.GONE);
                         String id1 = jiResult.get(index).getId();
                         persenter.sendGet(Constant.ZHAN + "?categoryId=" + id1 + "&page=1&count=8", ByIdBean.class);
                         backPage();
@@ -400,11 +400,9 @@ public class FragmentHome extends Fragment implements IView {
             EventBus.getDefault().postSticky(new EventBean("goods",data));
             startActivity(intent);
         }
-
     }
 
     private long exitTime = 0;
-
     private void backPage() {
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();

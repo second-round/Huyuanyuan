@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
+        pager.setCurrentItem(2);
 
         //点击切换 Fragment
         radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

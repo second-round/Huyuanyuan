@@ -36,6 +36,22 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+//圆角， 圆形
+//        fresco实现
+//glide实现
+//
+//需要自己实现圆角，继承自BitmapTransformation操作bitmap对象实现(圆形同理)：
+
+//Fresco缓存也是一大亮点， 三级缓存，分别是 Bitmap缓存，未解码图片缓存， 文件缓存
+
+//加载图片速度-在不考虑缓存的情况下， Fresco也比Glide快很多====Fresco需要3s左右， Glide需要5s左右
+
+
+
+
+
+
+
 public class FragmentMine extends Fragment implements IView {
     @BindView(R.id.nickname)
     TextView nickname;
@@ -131,6 +147,13 @@ public class FragmentMine extends Fragment implements IView {
             nickname.setText(loginBean.getResult().getNickName());
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        persenter.sendGet(Constant.GETUSERBYID,UserInfoBean.class);
+    }
+
     @Override
     public void onPause() {
         super.onPause();

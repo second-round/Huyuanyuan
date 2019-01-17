@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,14 +14,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.xiangmu.R;
 import com.example.xiangmu.bean.AlldorInfoByStatusBean;
+import com.example.xiangmu.bean.OrderBean;
 import com.example.xiangmu.view.CustomJiaJian;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class AlldorInfoByStatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private List<AlldorInfoByStatusBean.Result.DetailListBean> mList;
+public class AlldorInfoByStatusAdapter extends RecyclerView.Adapter<AlldorInfoByStatusAdapter.ViewHolder> {
+
+    private List<OrderBean.OrderListBean.DetailListBean> mList;
     private Context mContext;
 
     public AlldorInfoByStatusAdapter(Context mContext) {
@@ -28,7 +34,7 @@ public class AlldorInfoByStatusAdapter extends RecyclerView.Adapter<RecyclerView
         mList=new ArrayList<>();
     }
 
-    public void setmList(List<AlldorInfoByStatusBean.Result.DetailListBean> datas) {
+    public void setmList(List<OrderBean.OrderListBean.DetailListBean> datas) {
         mList.clear();
         if (datas!=null){
             mList.addAll(datas);
@@ -36,40 +42,28 @@ public class AlldorInfoByStatusAdapter extends RecyclerView.Adapter<RecyclerView
         notifyDataSetChanged();
     }
 
-    public List<AlldorInfoByStatusBean.Result.DetailListBean> getmList() {
+    public List<OrderBean.OrderListBean.DetailListBean> getmList() {
         return mList;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view=LayoutInflater.from(mContext).inflate(R.layout.item_allorders_recycl,viewGroup,
-                false);
-        return new AlldorInfoByStatusViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view=LayoutInflater.from(mContext).inflate(R.layout.item_ding,viewGroup,false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
-        AlldorInfoByStatusViewHolder holder= (AlldorInfoByStatusViewHolder) viewHolder;
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         //设置商品的图片
-        Glide.with(mContext).load(mList.get(i).commodityPic);
-        holder.recycle_title.setText(mList.get(i).getCommodityName());
-        holder.recycle_price.setText(mList.get(i).getCommodityPrice()+"");
-        //调用customjiajian里面的方法设置 加减号中间的数字
-        holder.customjiajian.setEditText(mList.get(i).getCommodityCount());
-        holder.customjiajian.setCustomListener(new CustomJiaJian.CustomListener() {
-            @Override
-            public void jiajian(int count) {
-                //改变数据源中的数量
-                mList.get(i).setCommodityCount(count);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void shuRuZhi(int count) {
-
-            }
-        });
+        String commodityPic = mList.get(i).getCommodityPic();
+        String[] split = commodityPic.split("\\,");
+        List<String> list = Arrays.asList(split);
+        Glide.with(mContext).load(list.get(0)).into(viewHolder.sd_shop_sim);
+        viewHolder.che_box.setVisibility(View.GONE);
+        viewHolder.tv_shop_name.setText(mList.get(i).getCommodityName());
+        viewHolder.tv_shop_price.setText(mList.get(i).getCommodityPrice()+"");
+        viewHolder.count.setText(mList.get(i).getCommodityCount());
     }
 
 
@@ -78,25 +72,20 @@ public class AlldorInfoByStatusAdapter extends RecyclerView.Adapter<RecyclerView
     public int getItemCount() {
         return mList.size();
     }
-    static class AlldorInfoByStatusViewHolder extends RecyclerView.ViewHolder{
-        public ImageView recycle_icon;
-        public TextView recycle_title;
-        public TextView recycle_price;
-        public CustomJiaJian customjiajian;
-        public AlldorInfoByStatusViewHolder(@NonNull View itemView) {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.sd_shop_sim)
+        ImageView sd_shop_sim;
+        @BindView(R.id.tv_shop_name)
+        TextView tv_shop_name;
+        @BindView(R.id.tv_shop_price)
+        TextView tv_shop_price;
+        @BindView(R.id.che_box)
+        CheckBox che_box;
+        @BindView(R.id.count)
+        TextView count;
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            recycle_icon=itemView.findViewById(R.id.recycle_icon);
-            recycle_title=itemView.findViewById(R.id.recycle_title);
-            recycle_price=itemView.findViewById(R.id.recycle_price);
-            customjiajian=itemView.findViewById(R.id.customjiajian);
+            ButterKnife.bind(this,itemView);
         }
-    }
-    UpdateListener updateListener;
-    public void setUpdateListener(UpdateListener updateListener){
-        this.updateListener = updateListener;
-    }
-    //接口
-    public interface UpdateListener{
-        void setTotal(String total, String num, boolean allCheck);
     }
 }

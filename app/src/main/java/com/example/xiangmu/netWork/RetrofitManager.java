@@ -28,6 +28,29 @@ import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+//Retrofit设计精妙，代码简洁，使用方便
+
+//Retrofit的作用是按照接口去定制Call网络工作对象
+//Retrofit并不做网络请求，只是生成一个能做网络请求的对象。
+
+//Retrofit做的事情，就是为开发者节省这部分的工作量，
+// Retrofit一方面从底层统一用OkHttp去做网络处理；
+// 另一方面在外层灵活提供能直接融入业务逻辑的Call网络访问对象
+
+//具体来说，Retrofit只负责生产对象，生产能做网络请求的工作对象，
+// 他有点像一个工厂，只提供产品，工厂本身不处理网络请求，产品才能处理网络请求。
+
+
+
+//1.Interceptor拦截器
+
+
+//Retrofit实现原理——函数解析、网络请求和数据转换
+
+
+
+
+
 public class RetrofitManager<T> {
     public static RetrofitManager retrofitManager;
 
@@ -151,6 +174,9 @@ public class RetrofitManager<T> {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
+                if (listener != null) {
+                    listener.onFail(e.getMessage());
+                }
             }
 
             @Override

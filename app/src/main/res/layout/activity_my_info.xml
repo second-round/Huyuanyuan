@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#fff"
-    tools:context=".ui.GoodsActivity">
+    android:background="#fff">
 
     <ScrollView
         android:layout_width="match_parent"

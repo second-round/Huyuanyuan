@@ -68,6 +68,7 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
     private MyAlert myDialog;
     private PersenterImpl persenter;
     private int commodityId;
+    private int num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,9 +120,6 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
         price.setText("￥" + goodsBean.getResult().getPrice() + "");
         commodityName.setText(goodsBean.getResult().getCommodityName());
         weight.setText(goodsBean.getResult().getWeight() + "kg");
-//        detalis_web.loadDataWithBaseURL(null, detailsHotBean.getResult().getDetails()+js, "textml", "utf-8", null);
-
-
     }
 
     @Override
@@ -148,10 +146,11 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
                 recycle_title.setText(goodsBean.getResult().getCommodityName());
                 recycle_price.setText("￥" + goodsBean.getResult().getPrice()+"");
                 production.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
                         String string = count.getText().toString();
-                        int i = Integer.parseInt(string);
+                        num = Integer.parseInt(string);
                         selShopCar();
                         myDialog.dismiss();
                     }
@@ -202,17 +201,23 @@ public class MyInfoActivity extends AppCompatActivity implements IView {
 
     //添加购物车
     private void addShopCar(List<ShopResultBean> list){
-        for (int i=0;i<list.size();i++){
-            if(Integer.valueOf(commodityId)==list.get(i).getCommodityId()){
-                int count = list.get(i).getCount();
-                count++;
-                list.get(i).setCount(count);
-                break;
-            }else if(i==list.size()-1){
-                list.add(new ShopResultBean(Integer.valueOf(commodityId),1));
-                break;
+        if(list.size()==0){
+            list.add(new ShopResultBean(Integer.valueOf(commodityId),num));
+        }else {
+            for (int i=0;i<list.size();i++){
+                if(Integer.valueOf(commodityId)==list.get(i).getCommodityId()){
+                    int count = list.get(i).getCount();
+                    count+=num;
+                    list.get(i).setCount(count);
+                    break;
+                }else if(i==list.size()-1){
+                    list.add(new ShopResultBean(Integer.valueOf(commodityId),num));
+                    break;
+                }
             }
         }
+
+
         String s = new Gson().toJson(list);
 
         Map<String,String> map=new HashMap<>();

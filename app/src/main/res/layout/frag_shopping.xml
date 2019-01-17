@@ -5,6 +5,16 @@
     android:orientation="vertical"
     >
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="购物车"
+        android:textSize="@dimen/sp_18"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_25"
+        android:textColor="#f00"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import com.example.xiangmu.R;
 import com.example.xiangmu.orderform.AllordersPage;
 import com.example.xiangmu.orderform.BeevaluatedPage;
+import com.example.xiangmu.orderform.FragCompleted;
 import com.example.xiangmu.orderform.FragForCollection;
 import com.example.xiangmu.orderform.FragObligation;
 
@@ -59,7 +60,7 @@ public class FragmentZhangDan extends Fragment {
         fragmentList.add(new FragObligation());
         fragmentList.add(new FragForCollection());
         fragmentList.add(new BeevaluatedPage());
-        fragmentList.add(new FragObligation());
+        fragmentList.add(new FragCompleted());
         PurchaseViewPage.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int i) {

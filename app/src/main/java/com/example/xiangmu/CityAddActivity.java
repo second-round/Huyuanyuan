@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -178,5 +179,15 @@ public class CityAddActivity extends AppCompatActivity implements IView {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            startActivity(new Intent(this, TJDDActivity.class));
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

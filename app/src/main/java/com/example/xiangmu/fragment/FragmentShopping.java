@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.xiangmu.R;
 import com.example.xiangmu.TJDDActivity;
@@ -64,6 +65,12 @@ public class FragmentShopping extends Fragment implements IView {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        shoppingAdapter.notifyDataSetChanged();
+    }
+
     private void initView() {
         shoppingAdapter=new MyShoppingAdapter(getContext());
         recyclerView.setAdapter(shoppingAdapter);
@@ -73,10 +80,10 @@ public class FragmentShopping extends Fragment implements IView {
             @Override
             public void callBack(List<ShowShoppingBean.ResuleBean> mlist) {
                 showShoppingBean.getResult().clear();
-                String s = new Gson().toJson(mlist);
-                Map<String,String> map=new HashMap<>();
-                map.put("data",s);
-                persenter.onPutStartRequest(Constant.TOBUSHOP,map,ShopCarAddBean.class);
+//                String s = new Gson().toJson(mlist);
+//                Map<String,String> map=new HashMap<>();
+//                map.put("data",s);
+//                persenter.onPutStartRequest(Constant.TOBUSHOP,map,ShopCarAddBean.class);
                 showShoppingBean.getResult().addAll(mlist);
                 totalMoney();
             }
@@ -126,6 +133,10 @@ public class FragmentShopping extends Fragment implements IView {
                         lists.addResult(showShoppingBean.getResult().get(i));
                     }
                 }
+                if (lists.getResult().size()==0){
+                    Toast.makeText(getActivity(),"请选择商品",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 EventBus.getDefault().postSticky(new EventBean("list",lists));
                 Intent intent = new Intent(getActivity(), TJDDActivity.class);
                 startActivity(intent);
@@ -154,5 +165,8 @@ public class FragmentShopping extends Fragment implements IView {
             showShoppingBean = (ShowShoppingBean) data;
             shoppingAdapter.setList(showShoppingBean.getResult());
         }
+//        if (data instanceof ShopCarAddBean){
+//            persenter.sendGet(Constant.QUERYSHOP,ShowShoppingBean.class);
+//        }
     }
 }

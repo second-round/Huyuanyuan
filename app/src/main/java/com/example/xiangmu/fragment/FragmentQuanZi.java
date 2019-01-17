@@ -52,7 +52,7 @@ public class FragmentQuanZi extends Fragment implements IView {
         recycle.setLayoutManager(manager);
         adapter = new CircleAdapter(getActivity());
         recycle.setAdapter(adapter);
-        persenter.sendGet(Constant.CIRCLEPATH+"?page="+page+"&count="+"5",CircleBean.class);
+        getData();
         adapter.setGreatClick(new CircleAdapter.GreatClick() {
             @Override
             public void click(int circleId, boolean isGreat) {
@@ -67,13 +67,42 @@ public class FragmentQuanZi extends Fragment implements IView {
 
             }
         });
+        recycle.setPullRefreshEnabled(true);
+        recycle.setLoadingMoreEnabled(true);
+        recycle.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                getData();
+            }
+
+            @Override
+            public void onLoadMore() {
+                getData();
+            }
+        });
+
 
     }
+
+    private void getData() {
+        persenter.sendGet(Constant.CIRCLEPATH+"?page="+page+"&count="+"5",CircleBean.class);
+    }
+
     @Override
     public void requesta(Object data) {
         if (data instanceof CircleBean) {
             CircleBean circleBean = (CircleBean) data;
-            adapter.setList(circleBean.getResult());
+
+            if (page==1){
+                adapter.setList(circleBean.getResult());
+            }else {
+                adapter.addList(circleBean.getResult());
+            }
+            page++;
+            recycle.refreshComplete();
+            recycle.loadMoreComplete();
+
         }
         if (data instanceof RegBean){
             RegBean regBean= (RegBean) data;

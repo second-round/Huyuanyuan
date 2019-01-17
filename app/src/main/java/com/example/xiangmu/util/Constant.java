@@ -1,7 +1,8 @@
 package com.example.xiangmu.util;
 
 public interface Constant {
-
+    //收货
+    String SHOUHUO="small/order/verify/v1/confirmReceipt";
     //登录
     String PATH = "http://mobile.bwstudent.com/";
     String LOGIN_PATH = "small/user/v1/login";
@@ -57,5 +58,7 @@ public interface Constant {
     String ONIMAGE = "small/user/verify/v1/modifyHeadPic";
 
     String ZHAN="small/commodity/v1/findCommodityByCategory";
+
+    String ZHIFU="small/order/verify/v1/pay";
 
 }

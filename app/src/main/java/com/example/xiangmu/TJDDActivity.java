@@ -64,6 +64,7 @@ public class TJDDActivity extends AppCompatActivity implements IView {
     LinearLayout saddAddress;
     private OrderAdapter adapter;
     private ShowShoppingBean list;
+    private ShowShoppingBean list2;
     private PersenterImpl persenter;
     private PopupWindow popupWindows;
     private TextView add;
@@ -92,6 +93,8 @@ public class TJDDActivity extends AppCompatActivity implements IView {
         adapter.setShopCarListener(new OrderAdapter.ShopCarListener() {
             @Override
             public void callBack(List<ShowShoppingBean.ResuleBean> mlist) {
+                list.getResult().clear();
+                list.getResult().addAll(mlist);
                 totalMoney();
             }
         });
@@ -141,6 +144,7 @@ public class TJDDActivity extends AppCompatActivity implements IView {
             public void onClick(View view) {
                 popupWindows.dismiss();
                 startActivity(new Intent(TJDDActivity.this, CityAddActivity.class));
+                finish();
             }
         });
     }
@@ -189,11 +193,13 @@ public class TJDDActivity extends AppCompatActivity implements IView {
             case R.id.qujiesuan:
                 Map<String,String> map=new HashMap<>();
                 List<ShopFuBean> lists=new ArrayList<>();
-                for (int i = 0; i < list.getResult().size(); i++) {
-                    if (list.getResult().get(i).isItem_check()){
-                        int commodityId = list.getResult().get(i).getCommodityId();
-                        int count = list.getResult().get(i).getCount();
+                list2=list;
+                for (int i = 0; i < list2.getResult().size(); i++) {
+                    if (list2.getResult().get(i).isItem_check()){
+                        int commodityId = list2.getResult().get(i).getCommodityId();
+                        int count = list2.getResult().get(i).getCount();
                         lists.add(new ShopFuBean(commodityId,count));
+                        list.getResult().remove(i);
                     }
                 }
                 String s = new Gson().toJson(lists);
@@ -223,10 +229,14 @@ public class TJDDActivity extends AppCompatActivity implements IView {
         }
         if (data instanceof RegBean){
             RegBean regBean= (RegBean) data;
+            Toast.makeText(TJDDActivity.this,regBean.getMessage(),Toast.LENGTH_SHORT).show();
             if (regBean.getStatus().equals("0000")){
                 setaddr(resuleBean);
             }
-            Toast.makeText(TJDDActivity.this,regBean.getMessage(),Toast.LENGTH_SHORT).show();
+            if (regBean.getMessage().equals("创建订单成功")){
+                adapter.setList(list.getResult());
+//                totalMoney();
+            }
         }
 
     }
