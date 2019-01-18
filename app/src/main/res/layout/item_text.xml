@@ -97,6 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:id="@+id/cancle"
                     android:layout_width="@dimen/dp_70"
                     android:layout_height="@dimen/dp_26"
                     android:text="取消订单"

@@ -43,6 +43,7 @@ public class CityAddActivity extends AppCompatActivity implements IView {
     EditText shu;
     private CityPicker cityPicker;
     private PersenterImpl persenter;
+    private String name1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class CityAddActivity extends AppCompatActivity implements IView {
         setContentView(R.layout.activity_city_add);
         persenter = new PersenterImpl(this);
         ButterKnife.bind(this);
+        Intent intent=getIntent();
+        name1 = intent.getStringExtra("name");
         initView();
 
     }
@@ -157,7 +160,11 @@ public class CityAddActivity extends AppCompatActivity implements IView {
         if (data instanceof ShopCarAddBean) {
             ShopCarAddBean shopCarAddBean = (ShopCarAddBean) data;
             Toast.makeText(this, shopCarAddBean.getMessage(), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, TJDDActivity.class));
+            if (name1.equals("1")){
+                startActivity(new Intent(this, TJDDActivity.class));
+            }else {
+                startActivity(new Intent(this, CityListActivity.class));
+            }
             finish();
         }
     }
@@ -184,7 +191,11 @@ public class CityAddActivity extends AppCompatActivity implements IView {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            startActivity(new Intent(this, TJDDActivity.class));
+            if (name1.equals("1")){
+                startActivity(new Intent(this, TJDDActivity.class));
+            }else {
+                startActivity(new Intent(this, CityListActivity.class));
+            }
             finish();
             return true;
         }

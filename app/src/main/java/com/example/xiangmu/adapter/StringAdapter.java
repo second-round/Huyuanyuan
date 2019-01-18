@@ -57,6 +57,15 @@ public class StringAdapter extends RecyclerView.Adapter<StringAdapter.ViewHolder
         AlldorInfoByStatusAdapter adapter=new AlldorInfoByStatusAdapter(context);
         viewHolder.recyclerView.setAdapter(adapter);
         adapter.setmList(list.get(i).getDetailList());
+        viewHolder.cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cancleListener!=null){
+                    cancleListener.callBack(list.get(i));
+                }
+            }
+        });
+
         viewHolder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,11 +82,14 @@ public class StringAdapter extends RecyclerView.Adapter<StringAdapter.ViewHolder
                 break;
             case 2:
                 viewHolder.button.setText("点击收货");
+                viewHolder.cancle.setVisibility(View.INVISIBLE);
                 break;
             case 3:
                 viewHolder.button.setText("去评价");
+                viewHolder.cancle.setVisibility(View.INVISIBLE);
                 break;
             case 9:
+                viewHolder.cancle.setVisibility(View.INVISIBLE);
                 viewHolder.button.setText("完成");
                 break;
             default:
@@ -94,13 +106,13 @@ public class StringAdapter extends RecyclerView.Adapter<StringAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView name;
         RecyclerView recyclerView;
-        private Button button;
+        private Button button,cancle;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.orderId);
             recyclerView=itemView.findViewById(R.id.recycle);
             button=itemView.findViewById(R.id.pay);
-
+            cancle=itemView.findViewById(R.id.cancle);
         }
     }
 
@@ -112,5 +124,11 @@ public class StringAdapter extends RecyclerView.Adapter<StringAdapter.ViewHolder
     public interface ShopCarListener {
         void callBack(OrderBean.OrderListBean list);
     }
-
+    private CancleListener cancleListener;
+    public void cancleListener(CancleListener cancleListener) {
+        this.cancleListener = cancleListener;
+    }
+    public interface CancleListener {
+        void callBack(OrderBean.OrderListBean list);
+    }
 }

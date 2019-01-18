@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.example.xiangmu.bean.UserInfoBean;
 import com.example.xiangmu.persenter.PersenterImpl;
 import com.example.xiangmu.util.Constant;
 import com.example.xiangmu.view.IView;
+import com.example.xiangmu.view.MyAlert;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.HashMap;
@@ -41,6 +43,8 @@ public class MyInfosActivity extends AppCompatActivity implements IView {
     private UserInfoBean bean;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor edit;
+    private MyAlert myAlertname;
+    private MyAlert myAlert1pass;
 
 
     @Override
@@ -49,6 +53,56 @@ public class MyInfosActivity extends AppCompatActivity implements IView {
         setContentView(R.layout.activity_my_infos);
         ButterKnife.bind(this);
         initView();
+        alertName();
+        alertPass();
+    }
+
+    private void alertPass() {
+        //修改密码
+        View v1=View.inflate(this,R.layout.alert_name,null);
+        myAlert1pass = new MyAlert(this, 0, 0, v1, R.style.DialogTheme);
+        EditText old=v1.findViewById(R.id.name);
+        EditText newpass=v1.findViewById(R.id.name);
+        Button productionpass=v1.findViewById(R.id.production);
+        Button cancelpass=v1.findViewById(R.id.cancel);
+        productionpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        cancelpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+    }
+
+    private void alertName() {
+        //修改昵称
+        View v=View.inflate(this,R.layout.alert_name,null);
+        myAlertname = new MyAlert(this, 0, 0, v, R.style.DialogTheme);
+        final EditText namee=v.findViewById(R.id.name);
+        Button production=v.findViewById(R.id.production);
+        Button cancel=v.findViewById(R.id.cancel);
+        production.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name.setText(namee.getText().toString());
+                Map<String,String> map=new HashMap<>();
+                map.put("nickName",namee.getText().toString());
+                persenter.onPutStartRequest(Constant.UPDATENICEHNG,map,RegBean.class);
+                myAlertname.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initView() {
@@ -67,10 +121,10 @@ public class MyInfosActivity extends AppCompatActivity implements IView {
                     // 此处为失去焦点时的处理内容
                     changeName.setVisibility(View.GONE);
                     name.setVisibility(View.VISIBLE);
-                    name.setText(changeName.getText().toString());
-                    Map<String,String> map=new HashMap<>();
-                    map.put("nickName",changeName.getText().toString());
-                    persenter.onPutStartRequest(Constant.UPDATENICEHNG,map,RegBean.class);
+//                    name.setText(changeName.getText().toString());
+//                    Map<String,String> map=new HashMap<>();
+//                    map.put("nickName",changeName.getText().toString());
+//                    persenter.onPutStartRequest(Constant.UPDATENICEHNG,map,RegBean.class);
                 }
             }
         });
@@ -92,6 +146,9 @@ public class MyInfosActivity extends AppCompatActivity implements IView {
                 }
             }
         });
+
+
+
     }
 
 
@@ -137,14 +194,14 @@ public class MyInfosActivity extends AppCompatActivity implements IView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.name:
-                name.setVisibility(View.GONE);
-                changeName.setVisibility(View.VISIBLE);
-                changeName.setText(name.getText().toString());
+                myAlertname.show();
+
                 break;
             case R.id.phone:
-                phone.setVisibility(View.GONE);
-                changePhone.setVisibility(View.VISIBLE);
-                changePhone.setText(phone.getText().toString());
+
+//                phone.setVisibility(View.GONE);
+//                changePhone.setVisibility(View.VISIBLE);
+//                changePhone.setText(phone.getText().toString());
                 break;
             default:
                 break;

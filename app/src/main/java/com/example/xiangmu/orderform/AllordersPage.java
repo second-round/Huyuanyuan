@@ -63,13 +63,46 @@ public class AllordersPage extends Fragment implements IView {
                 LinearLayoutManager.VERTICAL,false));
         adapter=new StringAdapter(getActivity(),0);
         allordersRecycle.setAdapter(adapter);
-        adapter.setShopCarListener(new StringAdapter.ShopCarListener() {
+        adapter.cancleListener(new StringAdapter.CancleListener() {
             @Override
             public void callBack(OrderBean.OrderListBean list) {
                 Map<String,String> map=new HashMap<>();
                 map.put("orderId",list.getOrderId());
-                map.put("payType",1+"");
-                persenter.sendMessage(Constant.ZHIFU,map,RegBean.class);
+                persenter.sendMessageDelete(Constant.DELORDER,map,RegBean.class);
+            }
+        });
+
+
+        adapter.setShopCarListener(new StringAdapter.ShopCarListener() {
+            @Override
+            public void callBack(OrderBean.OrderListBean list) {
+                String orderStatus = list.getOrderStatus();
+                int i = Integer.parseInt(orderStatus);
+                switch (i){
+                    case 1:
+                        Map<String,String> map=new HashMap<>();
+                        map.put("orderId",list.getOrderId());
+                        map.put("payType",1+"");
+                        persenter.sendMessage(Constant.ZHIFU,map,RegBean.class);
+                        break;
+                    case 2:
+                        Map<String, String> map1 = new HashMap<>();
+                        map1.put("orderId", list.getOrderId());
+                        persenter.onPutStartRequest(Constant.SHOUHUO,map1,RegBean.class);
+                        break;
+                    case 3:
+                        Map<String, String> map3 = new HashMap<>();
+                        map3.put("orderId", list.getOrderId());
+                        map3.put("payType", 1 + "");
+                        persenter.sendMessage(Constant.ZHIFU, map3, RegBean.class);
+                        break;
+                    case 9:
+                        break;
+                    default:
+                        break;
+                }
+
+
             }
         });
     }

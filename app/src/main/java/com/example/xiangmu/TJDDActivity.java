@@ -143,7 +143,9 @@ public class TJDDActivity extends AppCompatActivity implements IView {
             @Override
             public void onClick(View view) {
                 popupWindows.dismiss();
-                startActivity(new Intent(TJDDActivity.this, CityAddActivity.class));
+                Intent intent = new Intent(TJDDActivity.this, CityAddActivity.class);
+                intent.putExtra("name","1");
+                startActivity(intent);
                 finish();
             }
         });

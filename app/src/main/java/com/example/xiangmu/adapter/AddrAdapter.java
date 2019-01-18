@@ -51,9 +51,10 @@ public class AddrAdapter extends RecyclerView.Adapter<AddrAdapter.ViewHolder> {
         }else {
             viewHolder.check.setChecked(false);
         }
-        viewHolder.check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        viewHolder.check.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            public void onClick(View view) {
                 if (addrClickListener!=null){
                     addrClickListener.callBack(i);
                 }
@@ -74,14 +75,6 @@ public class AddrAdapter extends RecyclerView.Adapter<AddrAdapter.ViewHolder> {
             }
         });
 
-//        viewHolder.choose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (addrClickListener!=null){
-//                    addrClickListener.callBack(i);
-//                }
-//            }
-//        });
     }
 
     @Override

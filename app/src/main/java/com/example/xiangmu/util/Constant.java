@@ -57,8 +57,15 @@ public interface Constant {
     //上传头像
     String ONIMAGE = "small/user/verify/v1/modifyHeadPic";
 
+    //删除订单
+    String DELORDER="small/order/verify/v1/deleteOrder";
+
     String ZHAN="small/commodity/v1/findCommodityByCategory";
 
     String ZHIFU="small/order/verify/v1/pay";
+
+    //钱包
+    String QIANBAO="small/user/verify/v1/findUserWallet";
+
 
 }

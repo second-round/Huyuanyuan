@@ -1,5 +1,6 @@
 package com.example.xiangmu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,6 +61,10 @@ public class CityListActivity extends AppCompatActivity implements IView {
 
     @OnClick(R.id.add)
     public void onViewClicked() {
+        Intent intent=new Intent(CityListActivity.this,CityAddActivity.class);
+        intent.putExtra("name","2");
+        startActivity(intent);
+        finish();
     }
 
     @Override

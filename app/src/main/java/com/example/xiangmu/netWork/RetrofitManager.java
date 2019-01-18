@@ -88,13 +88,13 @@ public class RetrofitManager<T> {
                 .retryOnConnectionFailure(true)
                 .build();
 
-                Retrofit builder1 = new Retrofit.Builder()
+                Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(Constant.PATH)
                 .client(builder)
                 .build();
 
-        mBaseApis = builder1.create(BaseApis.class);
+        mBaseApis = retrofit.create(BaseApis.class);
     }
     public Map<String, RequestBody> generateRequestBody(Map<String,String> requestDataMap){
 
@@ -108,15 +108,14 @@ public class RetrofitManager<T> {
         return requestBodyHashMap;
     }
 
-    public RetrofitManager get(String url,HttpListener listener){
+    public void get(String url,HttpListener listener){
         mBaseApis.get(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getObserver(listener));
-        return retrofitManager;
     }
 
-    public RetrofitManager post(String dataUrl,Map<String,String> map,HttpListener listener){
+    public void post(String dataUrl,Map<String,String> map,HttpListener listener){
         if(map==null){
             map=new HashMap<>();
         }
@@ -124,10 +123,9 @@ public class RetrofitManager<T> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getObserver(listener));
-        return retrofitManager;
     }
 
-    public RetrofitManager put(String dataUrl,Map<String,String> map,HttpListener listener){
+    public void put(String dataUrl,Map<String,String> map,HttpListener listener){
         if(map==null){
             map=new HashMap<>();
         }
@@ -135,7 +133,6 @@ public class RetrofitManager<T> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getObserver(listener));
-        return retrofitManager;
     }
 
 
